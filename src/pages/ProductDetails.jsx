@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useTitle } from "../hooks/useTitle";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/cartContext";
+import { getProduct } from "../services";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,8 +14,7 @@ export const ProductDetails = () => {
     const { id } = useParams();
     useEffect(() => {
         async function fetchProducts() {
-            const response = await fetch(`http://localhost:3000/products/${id}`);
-            const data = await response.json()
+            const data = await getProduct(id);
             setProduct(data);
         }
         fetchProducts();

@@ -6,6 +6,7 @@ import CartPage from '../pages/Cart/CartPage';
 import { Register } from '../pages/Register';
 import { Login } from '../pages/Login';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import Pagenotfound from '../pages/Pagenotfound';
 
 const router = createBrowserRouter([
     {
@@ -35,9 +36,14 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
-            }, {
+            },
+            {
                 path: "/dashboard",
                 element: <ProtectedRoutes><Dashboard /></ProtectedRoutes>
+            },
+            {
+                path: '*',
+                element: <Pagenotfound />
             }
         ]
     }

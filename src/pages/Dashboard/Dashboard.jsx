@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react"
+import { getOrders } from "../../services"
 import OrderCard from "./OrderCard"
 
 function Dashboard() {
     const [orders, setOrders] = useState([])
     const tok = sessionStorage.getItem('token')
-    const usid = JSON.parse(sessionStorage.getItem('user'))
+    const user = JSON.parse(sessionStorage.getItem('user'))
+
     useEffect(() => {
-        async function getOrders() {
-            const response = await fetch(`http://localhost:3000/660/orders?user=${usid}`, {
-                method: 'GET',
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${tok}` }
-            });
-            const data = await response.json()
+
+        async function fetchData() {
+            const data = await getOrders()
             setOrders(data)
         }
-        getOrders()
+
+        fetchData()
+
+
     }, [])
     return (
         <section className="dark:bg-slate-800 dark:text-white min-h-[81vh] flex flex-col justify-start items-center gap-4">

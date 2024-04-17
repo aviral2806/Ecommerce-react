@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { useCart } from "../../../context/cartContext"
+import { getUser, createOrder } from "../../../services";
 
 function CheckoutModal({ setShowModal }) {
     const navigate = useNavigate()
@@ -11,17 +12,13 @@ function CheckoutModal({ setShowModal }) {
     const tok = sessionStorage.getItem('token')
     const user = JSON.parse(sessionStorage.getItem('user'))
     useEffect(() => {
-        async function getUser() {
-            const response = await fetch(`http://localhost:3000/600/users/${user}`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', authorization: `Bearer ${tok}` }
-            });
-            const data = await response.json()
+        async function fetchUser() {
+            const data = await getUser()
             setUserData(data)
             console.log(data)
         }
         if (tok && user) {
-            getUser()
+            fetchUser()
         }
     }, [])
     async function handleSubmit(e) {
@@ -33,12 +30,7 @@ function CheckoutModal({ setShowModal }) {
                 amount_paid: state.totalAmount,
                 quantity: cart.length
             }
-            const response = await fetch('http://localhost:3000/660/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', authorization: `Bearer ${tok}` },
-                body: JSON.stringify(order)
-            });
-            const data = await response.json()
+            const data = await createOrder(order)
             console.log(data)
             if (data) {
                 toast.success('Order placed successfully')
@@ -73,7 +65,8 @@ function CheckoutModal({ setShowModal }) {
                                 id="name"
                                 type="text"
                                 placeholder="Enter your name"
-                                value={userData.username || ""}
+                                defaultValue={userData.username || ""}
+                            // value={userData.username || ""}
                             />
                         </div>
                         <div className="mb-4">
@@ -85,7 +78,7 @@ function CheckoutModal({ setShowModal }) {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                value={userData.email || ""}
+                                defaultValue={userData.email || ""}
                             />
                         </div>
                         <div className="mb-4">

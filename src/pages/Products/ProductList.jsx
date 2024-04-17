@@ -3,6 +3,7 @@ import { useTitle } from "../../hooks/useTitle";
 import { ProductCard } from "./ProductCard"
 import { useLocation } from "react-router-dom";
 import { useFilter } from "../../context/filterContext";
+import { getProducts } from "../../services";
 
 
 export function ProductList() {
@@ -14,8 +15,7 @@ export function ProductList() {
     useTitle('Products List')
     useEffect(() => {
         async function fetchProds() {
-            const response = await fetch(`http://localhost:3000/products?name_like=${searchTerm ? searchTerm : ''}`)
-            const data = await response.json()
+            const data = await getProducts(searchTerm)
             initProductList(data)
         }
         fetchProds();
