@@ -56,7 +56,7 @@ export function ProductList() {
                     Clear Filters
                 </button>
             </div>
-            <div className="dark:bg-slate-800 flex flex-col justify-center items-center">
+            <div className="dark:bg-slate-800 flex flex-col justify-center items-center pb-2">
                 <div className="pt-6 pb-2 flex justify-between w-[75vw]">
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">Products ({products.length})</h1>
                     <button onClick={() => setIsOpen(!isOpen)}>

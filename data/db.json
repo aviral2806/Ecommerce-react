@@ -520,6 +520,12 @@
       "password": "$2a$10$vaevXhPsi7Va0t0rlTb3cuWbscQ1IjgLmS5JaTLavb2rNnPwYviyK",
       "username": "aviral",
       "id": 12
+    },
+    {
+      "email": "av12@gmail.com",
+      "password": "$2a$10$YnqAU8ez7ly2D.10rZphFuImj/gInTODL1T9i2vQx8nKR.yGaz5J2",
+      "username": "woog",
+      "id": 13
     }
   ]
 }

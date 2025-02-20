@@ -7,7 +7,7 @@ function CartPage() {
     console.log(state.cart)
     const isEmpty = state.cart.length === 0;
     return (
-        <div>
+        <div className="dark:bg-slate-800">
             {isEmpty ? <CartEmpty /> : <CartList />}
         </div>
     )
